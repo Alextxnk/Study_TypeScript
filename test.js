@@ -3,7 +3,7 @@
 // 3 урок - базовые типы в TypeScript 
 let a = 4;
 let str = 'hello';
-let bool = true; // TypeScript может сам привоить типы 
+let bool = true; // TypeScript может сам присвоить типы 
 // const b = a + bool; // выдаст ошибку, т.к. нельзя складывать число и булевое значение
 let arr = ['fdkl', 'vrt', 'vtmt']; // массив строк, если в него передать число, то будет ошибка 
 // так же в TypeScript есть специальный тип, который называется any 
@@ -14,46 +14,50 @@ e = 'vrjgn';
 //  тип any не рекомендуется использовать в Production 
 // в круглых скобках указываем, какой тип принимает функция, после круглых скобок указываем, какой тип вернет функция 
 function test(a) {
-   return '';
+    return '';
 }
 // функция может вернуть string или number, такая конструкция может быть применима и к простому объявлению переменной 
 function test1(a) {
-   return '';
+    return '';
 }
 const test2 = (a) => {
-   return a * 2;
+    return a * 2;
 };
 // аналогично типизируются map, reduce и прочие функции работы с массивами 
 arr = arr.map(x => x.toLowerCase()); // можно явно указать тип у x - (x: string)
 // long? означает number | undefined
-function countCoord(coord) {}
+function countCoord(coord) {
+}
 // union types: string | number могут быть проверены по типизации 
 // union types обозначает, что id может быть как number, так и string
 // есть еще safety types, чтоб можно было сделать проверку на тип 
 function printIt(id) {
-   if (typeof id === 'number') {
-      console.log(id.toString());
-   } else if (typeof id === 'string') {
-      id.toUpperCase();
-   }
+    if (typeof id === 'number') {
+        console.log(id.toString());
+    }
+    else if (typeof id === 'string') {
+        id.toUpperCase();
+    }
 }
 // аналогичные проверки можно сделать и для массивов 
 // функция принимает число, либо массив чисел 
 function getSum(a) {
-   if (Array.isArray(a)) {}
+    if (Array.isArray(a)) {
+    }
 }
 // если функция ничего не возвращает, пишем void, который будет означать, что функция ничего не вернет 
 const test3 = (a) => {
-   return;
+    return;
 };
 const x = undefined;
 const n = null;
 // таким способом мы можем разгрузить функции 
-function print(coord) {}
+function print(coord) {
+}
 // далее посмотрим, как работает каст (as) к типам 
 const c = (point) => {
-   // const d: I3DPoint = point; // такое вызовет ошибку, потому что мы не можем приветси  I3DPoint к point
-   const d = point; // так будет работать 
+    // const d: I3DPoint = point; // такое вызовет ошибку, потому что мы не можем приветси  I3DPoint к point
+    const d = point; // так будет работать 
 };
 // const myCanvas = document.getElementById('canvas'); // myCanvas будет HTMLElement | null
 const myCanvas = document.getElementById('canvas'); // вот так работает каст 
@@ -66,21 +70,20 @@ let k = 'test';
 // еще функция будет возвращать литеральный тип нумерический -1 | 1
 // мы обозначили, что принимаем литеральный строковый тип на вход action, а возвращаем литеральный нумерический тип
 function performAction(action) {
-   switch (action) {
-      case 'up':
-         return 1;
-      case 'down':
-         return -1;
-   }
+    switch (action) {
+        case 'up':
+            return 1;
+        case 'down':
+            return -1;
+    }
 }
-
 function performActionComplex(action) {
-   switch (action) {
-      case 'up':
-         return 1;
-      case 'down':
-         return -1;
-   }
+    switch (action) {
+        case 'up':
+            return 1;
+        case 'down':
+            return -1;
+    }
 }
 // 7 урок - Enums 
 // Enums полезно использовать, когда мы хотим ограничить область значений той или иной переменной 
@@ -92,70 +95,70 @@ function performActionComplex(action) {
 // кроме этого, мы можем задать с какого числа начнется отчет у числового Enum
 var Direction;
 (function (Direction) {
-   Direction[Direction["Up"] = 0] = "Up";
-   Direction[Direction["Down"] = 1] = "Down";
-   Direction[Direction["Left"] = 2] = "Left";
-   Direction[Direction["Right"] = 3] = "Right"; // 3
+    Direction[Direction["Up"] = 0] = "Up";
+    Direction[Direction["Down"] = 1] = "Down";
+    Direction[Direction["Left"] = 2] = "Left";
+    Direction[Direction["Right"] = 3] = "Right"; // 3
 })(Direction || (Direction = {}));
 // если мы вручнуню зададим число, то последующие значения увеличатся
 var Direction2;
 (function (Direction2) {
-   Direction2[Direction2["Up"] = 1] = "Up";
-   Direction2[Direction2["Down"] = 2] = "Down";
-   Direction2[Direction2["Left"] = 3] = "Left";
-   Direction2[Direction2["Right"] = 4] = "Right"; // 4
+    Direction2[Direction2["Up"] = 1] = "Up";
+    Direction2[Direction2["Down"] = 2] = "Down";
+    Direction2[Direction2["Left"] = 3] = "Left";
+    Direction2[Direction2["Right"] = 4] = "Right"; // 4
 })(Direction2 || (Direction2 = {}));
 // строковый Enum
 var StringDirection;
 (function (StringDirection) {
-   StringDirection["Up"] = "UP";
-   StringDirection["Down"] = "DOWN";
-   StringDirection["Left"] = "LEFT";
-   StringDirection["Right"] = "RIGHT";
+    StringDirection["Up"] = "UP";
+    StringDirection["Down"] = "DOWN";
+    StringDirection["Left"] = "LEFT";
+    StringDirection["Right"] = "RIGHT";
 })(StringDirection || (StringDirection = {}));
 // также бывает необходимо задавать гетерогенные Enums, у которых часть значений числовые, часть - строковые 
 var Decision;
 (function (Decision) {
-   Decision[Decision["Yes"] = 1] = "Yes";
-   //No = 'No',
-   Decision[Decision["Calc"] = calcEnum()] = "Calc";
+    Decision[Decision["Yes"] = 1] = "Yes";
+    //No = 'No',
+    Decision[Decision["Calc"] = calcEnum()] = "Calc";
 })(Decision || (Decision = {}));
 // также Enums могут быть расчетными, например мы хотим рассчитать значение, 
 // которое будет принимать Enum при значении No 
 function calcEnum() {
-   return 2;
+    return 2;
 }
 // также Enum в Runtime можно использовать как объекты, пригождается это крайне редко 
-function runEnum(obj) {}
+function runEnum(obj) {
+}
 // в качестве этого объекта мы можем использовать:
 runEnum(StringDirection);
 // также у Enums есть понятие обратного мапинга, когда нам нужно получить строковые значения какого-то из Enums
 var Test;
 (function (Test) {
-   Test[Test["A"] = 0] = "A";
+    Test[Test["A"] = 0] = "A";
 })(Test || (Test = {}));
 let testEnum = Test.A; // 0
 let nameA = Test[testEnum]; // A
-let cnst = 0 /* constEnum.A */ ;
+let cnst = 0 /* constEnum.A */;
 // пример с гранями
 var Dice;
 (function (Dice) {
-   Dice[Dice["One"] = 1] = "One";
-   Dice[Dice["Two"] = 2] = "Two";
-   Dice[Dice["Three"] = 3] = "Three";
+    Dice[Dice["One"] = 1] = "One";
+    Dice[Dice["Two"] = 2] = "Two";
+    Dice[Dice["Three"] = 3] = "Three";
 })(Dice || (Dice = {}));
-
 function ruDice(dice) {
-   switch (dice) {
-      case Dice.One:
-         return 'Один';
-      case Dice.Two:
-         return 'Два';
-      case Dice.Three:
-         return 'Три';
-      default:
-         const a = dice; // присвоили переменной, которая никогда не должна быть присвоена значение dice
-   }
+    switch (dice) {
+        case Dice.One:
+            return 'Один';
+        case Dice.Two:
+            return 'Два';
+        case Dice.Three:
+            return 'Три';
+        default:
+            const a = dice; // присвоили переменной, которая никогда не должна быть присвоена значение dice
+    }
 }
 // тип never обозначает, что эта переменная никогда не примет значения
 // это одно из полезных свойств типа never, котрое можно использовать с Enums
@@ -177,12 +180,12 @@ cort.push('two');
 // и в рамках этого мапа мы можем проходиться по нашему кортежу
 // при этом для того чтобы определить тип мы можем использовать typeof
 cort.map(s => {
-   switch (typeof s) {
-      case 'string':
-         break;
-      case 'number':
-         break;
-   }
+    switch (typeof s) {
+        case 'string':
+            break;
+        case 'number':
+            break;
+    }
 });
 // мы спокойно можем делать map этого массива, менять его значения, 
 // в зависимости от типа данных, которые там находятся 
@@ -197,3 +200,38 @@ const [v, ...m] = cort; // v - number, m - кортеж, котрый содер
 cort[0].toString();
 // поэтому четкая типизация по каждому из элементов, который мы будем доставать из массива у нас работает
 // 9 урок - Generics
+// часто нам необходимо писать не просто правильный и хорошо типизированный код, 
+// но и тот код, который можно легко переиспользовать 
+// одним из инструментов такой возможности переиспользования кода являются Generics
+// они позволяют использовать функции или другие объекты для разных типов данных 
+function logTime(num) {
+    console.log(new Date());
+    return num;
+}
+// елси нам понадобится тоже самое для строки, то прийдется дублировать код
+// в TypeScript есть удобный инструмент - Generics
+// мы можем в таких скобках: <> перед объявлением аргементов функции, передать некоторый T
+// T - это Generics тип, который мы можем в последствии использовать, 
+// как в аргументе, так и на выходе функции, так и внутри функции, если это будет необходимо  
+function logTimeGen(num) {
+    console.log(new Date());
+    return num;
+}
+// теперь если нам нужен определенный тип:
+logTimeGen('hello');
+logTimeGen(25);
+// также мы можем использовать все прелести "тайпгардов", 
+// которые присутствуют и при обычном использовании number или string
+function logTimeGen2(num) {
+    if (typeof num === 'string') {
+        num.toLowerCase();
+    }
+    return num;
+}
+function logTimeStamp(num) {
+    console.log(num.stamp); // мы берем свойтсво из интерфейса 
+    return num;
+}
+// 10 урок - JSX
+// JSX - это неотъемлемая часть React, на которой мы будем писать весь оставшийся курс 
+// во-первый нужно расширение файла, .jsx или .tsx, далее файл test.tsx

@@ -3,7 +3,7 @@
 // 3 урок - базовые типы в TypeScript 
 let a: number = 4;
 let str: string = 'hello';
-let bool = true; // TypeScript может сам привоить типы 
+let bool = true; // TypeScript может сам присвоить типы 
 // const b = a + bool; // выдаст ошибку, т.к. нельзя складывать число и булевое значение
 
 let arr: string[] = ['fdkl', 'vrt', 'vtmt']; // массив строк, если в него передать число, то будет ошибка 
@@ -324,4 +324,66 @@ cort[0].toString();
 
 
 // 9 урок - Generics
+// часто нам необходимо писать не просто правильный и хорошо типизированный код, 
+// но и тот код, который можно легко переиспользовать 
+// одним из инструментов такой возможности переиспользования кода являются Generics
+// они позволяют использовать функции или другие объекты для разных типов данных 
 
+function logTime(num: number):number {
+   console.log(new Date());
+   return num;
+}
+
+// елси нам понадобится тоже самое для строки, то прийдется дублировать код
+// в TypeScript есть удобный инструмент - Generics
+
+
+// мы можем в таких скобках: <> перед объявлением аргементов функции, передать некоторый T
+// T - это Generics тип, который мы можем в последствии использовать, 
+// как в аргументе, так и на выходе функции, так и внутри функции, если это будет необходимо  
+function logTimeGen<T>(num: T):T {
+   console.log(new Date());
+   return num;
+}
+
+// теперь если нам нужен определенный тип:
+logTimeGen<string>('hello');
+logTimeGen<number>(25);
+
+// также мы можем использовать все прелести "тайпгардов", 
+// которые присутствуют и при обычном использовании number или string
+function logTimeGen2<T>(num: T):T {
+   if (typeof num === 'string') {
+      num.toLowerCase();
+   }
+   return num;
+}
+
+// аналогично Generics можно использовать и в описании интерфейсов 
+interface MyInterface {
+   transform: <T, F>(a: T) => F;
+}
+
+// также можно использовать Generics в классах
+/* class MyGenClass<T> {
+   value: T; // свойство класса 
+}
+
+const gen = new MyGenClass<number>();
+gen.value; // number */
+
+
+// также Generics, как и любые другие типы могут extends что-то 
+interface TimeStamp {
+   stamp: number;
+}
+
+function logTimeStamp<T extends TimeStamp>(num: T):T {
+   console.log(num.stamp); // мы берем свойтсво из интерфейса 
+   return num;
+}
+
+
+// 10 урок - JSX
+// JSX - это неотъемлемая часть React, на которой мы будем писать весь оставшийся курс 
+// во-первый нужно расширение файла, .jsx или .tsx, далее файл test.tsx
